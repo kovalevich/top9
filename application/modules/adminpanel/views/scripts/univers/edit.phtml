@@ -1,0 +1,60 @@
+<?php $this->headTitle('Редактировать универ', 'PREPEND'); ?>
+
+<h2>Редактировать универ</h2>
+
+<form class="form-horizontal" role="form" method="post">
+
+    <div class="form-group">
+        <label for="name" class="col-sm-3 control-label">Алиас</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $this->form->id->getValue() ?></p>
+            <input type="hidden" name="id" value="<?php echo $this->form->id->getValue() ?>">
+       </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="col-sm-3 control-label">Оббревиатура</label>
+        <div class="col-sm-9">
+            <input type="text" name="name" class="form-control" id="name" value="<?php echo $this->form->name->getValue() ?>" placeholder="Беларуский">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="full_name" class="col-sm-3 control-label">Название универа</label>
+        <div class="col-sm-9">
+            <input type="text" name="full_name" class="form-control" id="full_name" value="<?php echo $this->form->full_name->getValue() ?>" placeholder="Беларуский">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="editor" class="col-sm-3 control-label">Описание</label>
+        <div class="col-sm-9">
+            <textarea id="editor" name="description" rows="10" cols="80">
+                <?php echo $this->form->description->getValue() ?>
+            </textarea>
+            <script src="/js/ckeditor/ckeditor.js"></script>
+            <script>
+                CKEDITOR.replace( 'editor', {
+                    toolbar:
+                        [
+                            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+                            { name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar'] },
+                            '/',
+                            { name: 'basicstyles', items : ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+                            { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                            '/',
+                            { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+                            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+                            { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] }
+                        ]
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить</button>
+        </div>
+    </div>
+</form>

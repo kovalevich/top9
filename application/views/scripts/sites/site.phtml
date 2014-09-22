@@ -1,0 +1,25 @@
+<?php
+$this->headTitle($this->site->title, 'PREPEND');
+$this->headMeta($this->truncate($this->site->description, 150), 'description');
+$this->headMeta('Каталог сайтов, продвижение, SEO', 'keywords');
+?>
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/sites">Каталог сайтов</a></li>
+    <li><a href="<?php echo $this->url(array('id'=>$this->site->category->id, 'page'=>1), 'sites_category') ?>"><?php echo $this->site->category->title; ?></a></li>
+    <li class="active"><?php echo $this->site->title ?></li>
+</ol>
+
+<div class="page-header">
+    <h1 class="blog-post-title"><?php echo $this->site->title ?></h1>
+    <p class="blog-post-meta"><a href="http://<?php echo $this->site->id ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $this->site->id ?></a> | в каталоге с <?php echo $this->nicetime($this->site->created) ?></p>
+</div>
+
+<div class="row">
+    <div class="blog-main">
+        <div class="blog-post">
+            <?php echo $this->site->description ?>
+        </div><!-- /.blog-post -->
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="content">
+    <div class="item">
+        <h2><?php echo $this->title ?></h2>
+        <a href="<?php echo $this->url(array('id'=>$this->entry->id), 'financesuser')?>" target="_blanc">СЧЕТА</a> <a href="<?php echo $this->url(array('id'=>$this->entry->id), 'reportuser')?>" target="_blanc">ОТЧЕТ</a> <a href="<?php echo $this->url(array('id'=>$this->entry->id), 'edituserpass')?>">СМЕНИТЬ ПАРОЛЬ</a>
+        <form action="<?php echo $this->form->getAction () ?>" enctype="multipart/form-data" method="post" "<?php echo $this->form->getAttrib('class')?>">
+        <table class="vertical">
+            <tr>
+                <?php echo "<th>Пользователь</th><td>{$this->user($this->entry)}</td>" ?>
+            </tr>
+            <tr>
+                <th>Уровень доступа</th>
+                <td>
+                    <?php echo $this->form->role ?>
+                </td>
+            </tr>
+            <tr>
+                <th>Статус</th>
+                <td>
+                    <?php echo $this->form->status ?>
+                </td>
+            </tr>
+            <tr>
+                <th>Загруженные файлы</th>
+                <td>
+                <?php if (count($this->entry->files) > 0):?>
+                <?php 
+                foreach ($this->entry->files as $file) {
+                    echo "<p><span class=\"information\">{$this->nicetime($file->loadet)}:</span> <a href=\"{$file->getLinc()}\">{$file->name}</a></p>";
+                }
+                ?>
+                <?php endif;?>
+                </td>
+            </tr>
+            
+            <tr>
+                <?php echo "<th>{$this->translate('mail')}</th><td>{$this->mailto($this->entry->email)}</td>" ?>
+            </tr>
+            <tr>
+                <?php echo "<th>{$this->translate('city')}</th><td>{$this->entry->city}</td>" ?>
+            </tr>
+            <tr>
+                <?php echo "<th>{$this->translate('phone')}</th><td>{$this->entry->phone}</td>" ?>
+            </tr>
+            <tr>
+                <?php  echo "<th>{$this->translate('him themes')}</th>" ?>
+                <td>
+                <?php if (count($this->user_themes) > 0) foreach ($this->user_themes as $theme) {
+                        echo "{$theme->title}, ";
+                    }
+                ?>
+            </tr>
+            <tr>
+                <th><?php echo $this->translate('modified')?></th>
+                <td><?php echo $this->entry->modified ? date("d.m.Y - H:i", strtotime($this->entry->modified)) : '-' ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $this->translate('last_visit')?></th>
+                <td><?php echo date("d.m.Y - H:i", strtotime($this->entry->last_visit)) ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $this->translate('last_buy')?></th>
+                <td><?php echo $this->entry->last_buy ? date("d.m.Y - H:i", strtotime($this->entry->last_buy)) : '-' ?></td>
+            </tr>
+            <tr>
+                <th>Заметка об пользователе</th>
+                <td><?php echo $this->form->notation ?></td>
+            </tr>
+        </table>
+        <?php echo $this->form->save ?>
+        </form>
+    </div>
+    
+    <?php if ($this->entry->role == 'user') :?>
+    <div class="item">
+        <h2>Работы пользователя в каталоге</h2>
+        <?php echo $this->projectstable($this->projects)?>
+        
+    </div>
+    <?php endif;?>
+    
+    <?php if ($this->entry->role == 'author') :?>
+    <div class="item">
+        <h2>Заказы, которые выполняет этот пользователь</h2>
+        <?php echo $this->orderstable($this->orders)?>
+    </div>
+    <?php endif;?>
+</div>

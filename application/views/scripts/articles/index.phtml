@@ -1,0 +1,39 @@
+<?php 
+    $this->headTitle('Каталог статей', 'PREPEND');
+    $this->headMeta('Белый и беспатный беларуский каталог статей. Опубликовать статью.', 'description');
+    $this->headMeta('каталог статей, публикации, seo, продвижение статьями', 'keywords');
+?>
+
+<div class="row">
+
+    <div class="col-sm-9 blog-main">
+        <div class="jumbotron">
+            <h1>Каталог статей <small>top9.by</small></h1>
+            <p class="lead">Добро пожаловать в самый добрый беларуский каталог статей!</p>
+        </div>
+
+        <?php foreach($this->articles as $article): ?>
+            <div class="blog-post">
+                <h3 class="blog-post-title"><a href="<?php echo $this->url(array('id'=>$article->id, 'category'=>$article->category->id), 'article')?>" title="Читать статью полностью"><?php echo $article->title ?></a></h3>
+                <p class="blog-post-meta"><?php echo $this->nicetime($article->created) ?></p>
+
+                <?php echo $this->truncate($article->text, 500) ?>
+                <p><a href="<?php echo $this->url(array('id'=>$article->category->id, 'page'=>1), 'articles_category') ?>"><span class="glyphicon glyphicon-tag"></span> <?php echo $article->category->title ?></a></p>
+            </div><!-- /.blog-post -->
+        <?php endforeach; ?>
+    </div>
+
+    <div class="col-md-3 sidebar">
+        <h3>Категории</h3>
+        <div class="bs-sidebar hidden-print affix-top" role="complementary">
+            <ul class="nav bs-sidenav">
+                <?php foreach($this->categories as $category): ?>
+                    <li><a href="<?php echo $this->url(array('id'=>$category->id, 'page'=>1), 'articles_category') ?>"><span class="badge pull-right"><?php echo $category->count ?></span><?php echo $category->title ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="alert alert-info">
+            <p>В каталоге статей top9.by размещаются только качественные и уникальные авторские статьи! Если вам есть что рассказать, и вы считаете, что это будет интересно людям, немедленно публикуйте свои статьи в нашем каталоге!</p>
+        </div>
+    </div>
+</div>

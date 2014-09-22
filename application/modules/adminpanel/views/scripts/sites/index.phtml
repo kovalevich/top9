@@ -1,0 +1,25 @@
+<?php $this->headTitle('Управление сайтами', 'PREPEND'); ?>
+
+<h2>Управление сайтами</h2>
+<form class="form-horizontal" role="form" method="post">
+    <div class="form-group">
+        <label for="category" class="col-sm-1 control-label">Категория</label>
+        <div class="col-sm-4">
+            <select name="category_id" id="category" class="form-control">
+                <?php foreach ($this->categories as $category): ?>
+                    <option value="<?php echo $category->id; ?>"><?php echo $category->title; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-filter"></span> Фильтровать</button>
+        </div>
+    </div>
+</form>
+<?php echo $this->sitestable($this->entries) ?>
+<?php echo $this->paginator ?>
+
+<script src="/js/confirm.js"></script>

@@ -1,0 +1,31 @@
+<div class="content">
+    <div class="item">
+        <h2><?php echo $this->title ?></h2>
+        <?php echo $this->form ?>
+        
+        <?php if (count($this->orders) > 0) :?>
+             <table>
+                <tr>
+                    <th>Автор</th>
+                    <th>Код заказа</th>
+                    <th>Тема</th>
+                    <th>Срок выполнения</th>
+                    <th>Стоимость заказа</th>
+                    <th>Статус</th>
+                </tr>
+                <?php foreach ($this->orders as $entry) :?>
+                <tr>
+                    <td><?php echo $this->user($entry->author) ?>
+                    <td><?php echo $entry->id ?></td>
+                    <td><?php echo $entry->title ?></td>
+                    <td><?php echo $entry->term ?></td>
+                    <td><?php echo $entry->price ?></td>
+                    <td><?php echo $this->translate($entry->status.' status') ?></td>
+                </tr>
+                <?php endforeach;?>
+            </table>
+        <?php else:?>
+        <?php echo $this->user($this->user) . " не выполнял заявок в указанный период." ?>
+        <?php endif;?>
+    </div>
+</div>

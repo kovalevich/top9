@@ -1,0 +1,75 @@
+<?php $this->headTitle('Поиск в рейтингах', 'PREPEND')?>
+<h2>Поиск в рейтингах</h2>
+<form role="form" method="post" action="/ratings/search">
+    <div class="input-group input-group-lg"">
+        <input type="text" name="search" class="form-control" placeholder="БГУ" value="<?php echo $this->word ?>">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+    </div><!-- /input-group -->
+</form>
+
+<div class="row">
+	<div class="text-center">
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- top_home_red -->
+		<ins class="adsbygoogle"
+			 style="display:inline-block;width:728px;height:90px"
+			 data-ad-client="ca-pub-5099021714015509"
+			 data-ad-slot="8055060331"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Нашлось в универах <small><?php echo count($this->univers) . ' ' . $this->bycounts(count($this->univers), 'результат', 'результата', 'результатов')?></small></h3>
+        <?php $place = 0; foreach($this->univers as $entry) : $place++; ?>
+            <div class="row">
+                <h4 class="col-sm-7">
+                    <small><?php echo $entry->place.' место: ';?></small>
+                    <a href="<?php echo $this->url(array('id'=>$entry->id), 'univer'); ?>"><?php echo $entry->name; ?></a>
+                </h4>
+                <h4 class="col-sm-5">
+                    <span class="label label-danger"><?php echo sprintf($this->bycounts($entry->votes, '%s голос', '%s голоса', '%s голосов'), $entry->votes)?></span>
+                </h4>
+            </div>
+        <?php endforeach; ?>
+        <hr/>
+        <a class="btn btn-sm btn-primary" href="/univers/all" role="button">Все универы</a>
+    </div>
+    <div class="col-sm-4">
+        <h3>Нашлось в колледжах <small><?php echo count($this->colleges) . ' ' . $this->bycounts(count($this->colleges), 'результат', 'результата', 'результатов')?></small></h3>
+        <?php $place = 0; foreach($this->colleges as $entry) : $place++; ?>
+            <div class="row">
+                <h4 class="col-sm-7">
+                    <small><?php echo $entry->place.' место: ';?></small>
+                    <a href="<?php echo $this->url(array('id'=>$entry->id), 'college'); ?>"><?php echo $entry->name; ?></a>
+                </h4>
+                <h4 class="col-sm-5">
+                    <span class="label label-danger"><?php echo sprintf($this->bycounts($entry->votes, '%s голос', '%s голоса', '%s голосов'), $entry->votes)?></span>
+                </h4>
+            </div>
+        <?php endforeach; ?>
+        <hr/>
+        <a class="btn btn-sm btn-primary" href="/colleges/all" role="button">Все колледжи</a>
+    </div>
+    <div class="col-sm-4">
+        <h3>Нашлось в городах <small><?php echo count($this->cities) . ' ' . $this->bycounts(count($this->cities), 'результат', 'результата', 'результатов')?></small></h3>
+        <?php $place = 0; foreach($this->cities as $entry) : $place++; ?>
+            <div class="row">
+                <h4 class="col-sm-7">
+                    <small><?php echo $entry->place.' место: ';?></small>
+                    <a href="<?php echo $this->url(array('id'=>$entry->id), 'city'); ?>"><?php echo $entry->name; ?></a>
+                </h4>
+                <h4 class="col-sm-5">
+                    <span class="label label-danger"><?php echo sprintf($this->bycounts($entry->votes, '%s голос', '%s голоса', '%s голосов'), $entry->votes)?></span>
+                </h4>
+            </div>
+        <?php endforeach; ?>
+        <hr/>
+        <a class="btn btn-sm btn-primary" href="/cities/all" role="button">Все города</a>
+    </div>
+</div>

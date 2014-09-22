@@ -1,0 +1,25 @@
+<?php
+$this->headTitle($this->article->meta_title, 'PREPEND');
+$this->headMeta($this->article->meta_description, 'description');
+$this->headMeta($this->article->meta_keywords, 'keywords');
+?>
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/articles">Каталог статей</a></li>
+    <li><a href="<?php echo $this->url(array('id'=>$this->article->category->id, 'page'=>1), 'articles_category') ?>"><?php echo $this->article->category->title; ?></a></li>
+    <li class="active"><?php echo $this->article->title ?></li>
+</ol>
+
+<div class="page-header">
+    <h1 class="blog-post-title"><?php echo $this->article->title ?></h1>
+    <p class="blog-post-meta"><?php echo $this->nicetime($this->article->created) ?></p>
+</div>
+
+<div class="row">
+    <div class="blog-main">
+        <div class="blog-post">
+            <?php echo $this->article->text ?>
+        </div><!-- /.blog-post -->
+    </div>
+</div>

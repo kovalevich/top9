@@ -1,0 +1,20 @@
+<h2>Голоса</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Универы: <small><?php echo $this->votes['univers']?></small></h3>
+    </div>
+    <div class="col-sm-4">
+        <h3>Колледжи: <small><?php echo $this->votes['colleges']?></small></h3>
+    </div>
+    <div class="col-sm-4">
+        <h3>Города: <small><?php echo $this->votes['cities']?></small></h3>
+    </div>
+</div>
+
+<h2>Новые публикации</h2>
+<?php echo $this->articlestable($this->articles); ?>
+
+<h2>Новые сайты</h2>
+<?php echo $this->sitestable($this->sites); ?>
+
+<script src="/js/confirm.js"></script>

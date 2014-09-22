@@ -1,0 +1,2 @@
+O:18:"Models_Sites_Model":5:{s:2:"id";s:9:"bylink.by";s:5:"title";s:37:"Разработка WEB-Сайтов";s:7:"created";s:19:"2014-04-08 23:41:17";s:11:"description";s:68:"<p>Создание сайтов любой сложности</p>
+";s:8:"category";O:23:"Models_Categories_Model":5:{s:2:"id";s:8:"internet";s:5:"title";s:16:"Интернет";s:11:"description";s:158:"Интернет-маркетинг. Сайты. Новости интернета. Услуги по созданию и продвижению сайтов.";s:5:"count";s:1:"2";s:11:"sites_count";s:1:"8";}}

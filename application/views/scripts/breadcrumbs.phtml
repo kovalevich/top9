@@ -1,0 +1,13 @@
+<section class="breadcrumbs">
+<?php 
+    foreach ($this->pages as $page) {
+    	$active = $page->isActive(true);
+        
+    	if (!$active)
+    	    echo '<a href="' . $this->baseUrl($page->getHref()) . '">' . $page->getLabel() . '</a> <em>/</em> ';
+    	else 
+    	    echo var_dump($page); $page->getLabel();
+    }
+
+?>
+</section>

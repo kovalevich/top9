@@ -1,0 +1,41 @@
+<!-- top -->
+<?php $city = $this->cities[0]; ?>
+	<div class="bigtab">
+		<span class="position"><?php echo $city->place.' '.$this->translate('place').':';?></span>
+		<a href="<?php echo $this->url(array('id'=>$city->id), 'city'); ?>" title="<?php echo sprintf($this->translate('go_to'), $city->name); ?>"><?php echo $city->name; ?></a>
+		<span class="votes">
+		<?php echo sprintf($this->translate(array('vote','votes', $city->votes)), $city->votes)?>
+		</span>
+		<a onclick="getItem ('<?php echo $city->id; ?>', 'cities')" title="<?php echo sprintf($this->translate('vote_for'), $city->name); ?>" id="vote_button"><?php echo $this->translate('govote'); ?></a>
+		<div style="clear: both;"></div>
+	</div>
+	<div class="leftcolumn">
+	<h3><?php echo $this->translate('top 9 cities') ?><a href="<?php echo $this->url(array('action'=>'all'))?>" title="<?php echo $this->translate('show_all')?>"><?php echo $this->translate('all_cities') ?> &rsaquo;</a></h3>
+	Взять <a href="http://kredit-belarus.by/kredity-na-nedvijimost.html" title="Узнать о кредитах на строительство в Беларуси">кредит на строительство</a>
+	<?php $i = 0; foreach($this->cities as $city) : $i++;?>
+	<?php if ($i != 1) :?>
+		<div class="tab">
+		    <div class="l">
+			<span class="numb"><?php echo $city->place;?></span>
+			<a href="<?php echo $this->url(array('id'=>$city->id), 'city'); ?>" title="<?php echo sprintf($this->translate('go_to'), $city->name); ?>"><?php echo $city->name; ?></a>
+			<span class="votes" title="<?php echo sprintf($this->translate(array('vote','votes', $city->votes)), $city->votes)?>"><?php echo $city->votes; ?></span>
+			<a onclick="getItem ('<?php echo $city->id; ?>', 'cities')" title="<?php echo sprintf($this->translate('vote_for'), $city->name); ?>" id="vote_button"><?php echo $this->translate('govote'); ?></a>
+			</div>
+			<div class="descr"><?php echo $this->truncate($city->description, 150) ?></div>
+		</div>
+	<?php endif;?>
+<?php endforeach; ?>
+    </div>
+    <div class="rightcolumn">
+        <h3><?php echo $this->translate('last records') ?></h3>
+        <div id="notations">
+    	</div>
+        <script type="text/javascript">
+            var thisUpdate = function(){
+            	updateNotations('city', '', true, true);
+            }
+            window.onload = function(){
+                thisUpdate();
+            };
+        </script>
+    </div>

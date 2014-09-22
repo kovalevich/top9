@@ -1,0 +1,68 @@
+<?php
+$this->headTitle('ТОП9', 'PREPEND');
+$this->headMeta('Рейтинг городов Беларуси, лучшие университеты, рейтинг колледжей Беларуси', 'description');
+$this->headMeta('рейтинг городов, лучшие универы', 'keywords');
+?>
+
+<div class="row">
+    <h3 class="text-center"><small>всего голосов: </small> <?php echo $this->summ ?></h3>
+    <div class="progress progress-striped">
+
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $this->proc ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $this->proc ?>%">
+            <span class="sr-only"><?php echo $this->proc ?>% Complete</span>
+        </div>
+    </div>
+</div>
+
+<hr class="half-rule" />
+
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Рейтинг универов <small><?php echo $this->votes['univers'] . ' ' . $this->bycounts($this->votes['univers'], 'голос', 'голоса', 'голосов')?></small></h3>
+        <?php $place = 0; foreach($this->top_univers as $entry) : $place++; ?>
+            <div class="row">
+                <h4 class="col-sm-7">
+                    <small><?php echo $place.' место: ';?></small>
+                    <a href="<?php echo $this->url(array('id'=>$entry->id), 'univer'); ?>"><?php echo $entry->name; ?></a>
+                </h4>
+                <h4 class="col-sm-5">
+                    <span class="label label-danger"><?php echo sprintf($this->bycounts($entry->rating, '%s голос', '%s голоса', '%s голосов'), $entry->rating)?></span>
+                </h4>
+            </div>
+        <?php endforeach; ?>
+        <hr/>
+        <a class="btn btn-sm btn-primary" href="/univers/all" role="button">Все универы</a>
+    </div>
+    <div class="col-sm-4">
+        <h3>Рейтинг колледжей <small><?php echo $this->votes['colleges'] . ' ' . $this->bycounts($this->votes['colleges'], 'голос', 'голоса', 'голосов')?></small></h3>
+        <?php $place = 0; foreach($this->top_colleges as $entry) : $place++; ?>
+            <div class="row">
+                <h4 class="col-sm-7">
+                    <small><?php echo $place.' место: ';?></small>
+                    <a href="<?php echo $this->url(array('id'=>$entry->id), 'college'); ?>"><?php echo $entry->name; ?></a>
+                </h4>
+                <h4 class="col-sm-5">
+                    <span class="label label-danger"><?php echo sprintf($this->bycounts($entry->rating, '%s голос', '%s голоса', '%s голосов'), $entry->rating)?></span>
+                </h4>
+            </div>
+        <?php endforeach; ?>
+        <hr/>
+        <a class="btn btn-sm btn-primary" href="/colleges/all" role="button">Все колледжи</a>
+    </div>
+    <div class="col-sm-4">
+        <h3>Рейтинг городов <small><?php echo $this->votes['cities'] . ' ' . $this->bycounts($this->votes['cities'], 'голос', 'голоса', 'голосов')?></small></h3>
+        <?php $place = 0; foreach($this->top_cities as $entry) : $place++; ?>
+            <div class="row">
+                <h4 class="col-sm-7">
+                    <small><?php echo $place.' место: ';?></small>
+                    <a href="<?php echo $this->url(array('id'=>$entry->id), 'city'); ?>"><?php echo $entry->name; ?></a>
+                </h4>
+                <h4 class="col-sm-5">
+                    <span class="label label-danger"><?php echo sprintf($this->bycounts($entry->rating, '%s голос', '%s голоса', '%s голосов'), $entry->rating)?></span>
+                </h4>
+            </div>
+        <?php endforeach; ?>
+        <hr/>
+        <a class="btn btn-sm btn-primary" href="/cities/all" role="button">Все города</a>
+    </div>
+</div>

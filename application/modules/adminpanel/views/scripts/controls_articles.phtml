@@ -1,0 +1,37 @@
+<?php if ($this->pageCount): ?>
+    <ul class="pagination">
+        <!-- First page link -->
+        <li <?php if (!isset($this->previous)) echo 'class="disabled"' ?>>
+            <a href="<?php echo isset($this->previous) ? $this->url(array('page' => $this->first)) . (Zend_Registry::get('category') ? '?category_id=' . Zend_Registry::get('category') : '') : '#'; ?>">
+                &laquo;
+            </a>
+        </li>
+        <li <?php if (!isset($this->previous)) echo 'class="disabled"' ?>>
+            <!-- Previous page link -->
+            <a href="<?php echo isset($this->previous) ? $this->url(array('page' => $this->previous)) . (Zend_Registry::get('category') ? '?category_id=' . Zend_Registry::get('category') : '') : '#'; ?>">
+                &lsaquo;
+            </a>
+        <li>
+
+            <?php foreach ($this->pagesInRange as $page): ?>
+        <li  <?php if ($page == $this->current) echo 'class="active"' ?>>
+            <a href="<?php echo $page != $this->current ? $this->url(array('page' => $page)) . (Zend_Registry::get('category') ? '?category_id=' . Zend_Registry::get('category') : '') : '#'; ?>">
+                <span class="disabled"><?php echo $page; ?></span>
+            </a>
+        </li>
+        <?php endforeach; ?>
+
+        <li <?php if (!isset($this->next)) echo 'class="disabled"' ?>>
+            <!-- Next page link -->
+            <a href="<?php echo isset($this->next) ? $this->url(array('page' => $this->next)) . (Zend_Registry::get('category') ? '?category_id=' . Zend_Registry::get('category') : '') : '#'; ?>">
+                &rsaquo;
+            </a>
+        </li>
+        <li <?php if (!isset($this->next)) echo 'class="disabled"' ?>>
+            <!-- Last page link -->
+            <a href="<?php echo isset($this->next) ? $this->url(array('page' => $this->last)) . (Zend_Registry::get('category') ? '?category_id=' . Zend_Registry::get('category') : '') : '#'; ?>">
+                &rsaquo;&rsaquo;
+            </a>
+        </li>
+    </ul>
+<?php endif; ?>

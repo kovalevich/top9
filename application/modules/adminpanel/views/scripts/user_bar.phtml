@@ -1,0 +1,12 @@
+<div class="userbar">
+<?php if ($this->user == false) :?>
+	<span class="button">
+	    <a href="https://oauth.vk.com/authorize?client_id=3789519&scope=photos&redirect_uri=http://top9.by/auth/vk&response_type=code"><?php echo $this->translate('login') ?></a>
+    </span>
+<?php else :?>
+    <a href="<?php echo $this->url(array('id'=>$this->user->id), 'user') ?>" title="<?php echo $this->user->name.' '.$this->user->last_name ?>"><img src="<?php echo $this->user->avatar ?>" width="25px"></a>
+    <span class="button">
+        <a href="<?php echo $this->url(array('action'=>'logout', 'controller'=>'auth')) ?>"><?php echo $this->translate('logout') ?></a>
+    </span>
+<?php endif; ?>
+</div>

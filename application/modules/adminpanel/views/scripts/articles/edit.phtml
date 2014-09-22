@@ -1,0 +1,87 @@
+<?php $this->headTitle('Редактировать статью', 'PREPEND'); ?>
+
+<h2>Редактировать статью</h2>
+
+<form class="form-horizontal" role="form" method="post">
+
+    <div class="form-group">
+        <label for="id" class="col-sm-3 control-label">Алиас</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $this->form->id->getValue() ?></p>
+            <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $this->form->id->getValue() ?>" placeholder="id">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="category" class="col-sm-3 control-label">Категория</label>
+        <div class="col-sm-9">
+            <select name="category_id" id="category" class="form-control">
+                <?php foreach ($this->categories as $category): ?>
+                    <option <?php echo $this->form->category_id->getValue() == $category->id ? 'selected ' : ''; ?>value="<?php echo $category->id; ?>"><?php echo $category->title; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="title" class="col-sm-3 control-label">Заголовок статьи</label>
+        <div class="col-sm-9">
+            <input type="text" name="title" class="form-control" id="title" value="<?php echo $this->form->title->getValue() ?>" placeholder="Заголовок">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="editor" class="col-sm-3 control-label">Текст</label>
+        <div class="col-sm-9">
+            <textarea id="editor" name="text" rows="10" cols="80">
+                <?php echo $this->form->text->getValue() ?>
+            </textarea>
+            <script src="/js/ckeditor/ckeditor.js"></script>
+            <script>
+                CKEDITOR.replace( 'editor', {
+                    toolbar:
+                        [
+                            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+                            { name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar'] },
+                            '/',
+                            { name: 'basicstyles', items : ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+                            { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                            '/',
+                            { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+                            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+                            { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] }
+                        ]
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="meta_title" class="col-sm-3 control-label">meta title</label>
+        <div class="col-sm-9">
+            <input type="text" name="meta_title" class="form-control" id="meta_title" value="<?php echo $this->form->meta_title->getValue() ?>" placeholder="Заголовок">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="meta_keywords" class="col-sm-3 control-label">meta keywords</label>
+        <div class="col-sm-9">
+            <input type="text" name="meta_keywords" class="form-control" id="meta_keywords" value="<?php echo $this->form->meta_keywords->getValue() ?>" placeholder="Заголовок">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="meta_description" class="col-sm-3 control-label">meta keywords</label>
+        <div class="col-sm-9">
+            <textarea name="meta_description" rows="3" class="form-control"><?php echo $this->form->meta_description->getValue();?></textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="public" class="form-control" id="public" value="1">
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить</button>
+        </div>
+    </div>
+</form>

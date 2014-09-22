@@ -1,0 +1,14 @@
+<label for="themes"><?php echo $this->element->getLabel()?></label>
+
+<div class="categoriesbuttons">Выберите специализацию: <br/>
+ <?php echo $this->{$this->element->helper} ('categoriesbutton')?>
+ <div class="clear"></div>
+</div>
+
+<div class="categorieslist">
+Выберите предмет: <br/>
+<?php echo $this->{$this->element->helper} ('tree')?>
+<div class="clear"></div>
+</div>
+
+<input type="hidden" name="<?php echo $this->element->getName()?>" id="themeselement" value="<?php echo $this->element->getValue()?>">

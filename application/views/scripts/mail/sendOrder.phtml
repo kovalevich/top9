@@ -1,0 +1,19 @@
+<?php echo "
+        Здравствуйте, {$this->user->name}!
+        
+        Поступил заказ на выполнеие работы: 
+        Тема: \"{$this->order->title}\"
+        Тип работы: {$this->order->type->name} 
+        Предмет: {$this->order->theme->title}
+        Описание: {$this->order->description}
+        Срок выполнения: {$this->nicetime($this->order->term)}
+        Файл задания на работу:";
+        $f = $this->order->getFiles();
+        if($f) 
+        foreach ($f as $file) {
+        	echo "http://diplomov.by".$file->getLinc();
+        }
+        
+        echo "
+        Если вы готовы принять заказ, вы можете обратиться к администратору сайта diplomov.by, указав номер заявки: {$this->order->id}
+        "; ?>

@@ -1,0 +1,13 @@
+<label for="select"><?php echo $this->element->getLabel()?></label>
+<div class="select" id="select">
+	<a href="#" class="slct" id="<?php echo $this->element->getName()?>"><?php echo $this->element->getValue() ? $this->element->options[$this->element->getValue()] : '&#160' ?></a>
+	<?php echo $this->{$this->element->helper}(
+        $this->element->getName(),
+        $this->element->options,
+        $this->element->getAttribs(),
+        $this->element->getValue()
+    ) ?>
+	<?php if ($this->element->getMessages()) 
+	    echo $this->formErrors($this->element->getMessages())
+	?>
+</div>

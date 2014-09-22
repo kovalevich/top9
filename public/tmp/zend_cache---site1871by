@@ -1,0 +1,4 @@
+O:18:"Models_Sites_Model":5:{s:2:"id";s:7:"1871.by";s:5:"title";s:65:"Барановичи — история в фотографиях";s:7:"created";s:19:"2014-06-18 00:49:08";s:11:"description";s:575:"<p><span style="font-size:20px"><a href="http://1871.by/listing_type/postcards/">Открытки</a> <a href="http://1871.by/listing_type/photos/">Фотографии</a> <a href="http://1871.by/listing_type/videos/">Видео</a> <a href="http://1871.by/listing_type/research/">Исследования</a></span></p>
+
+<p><span style="font-family:monospace; font-size:medium">Старые фотографии, открытки, аэрофотосъемка, карты города Барановичи с геопривязкой к карте Google Map</span></p>
+";s:8:"category";O:23:"Models_Categories_Model":5:{s:2:"id";s:7:"kultura";s:5:"title";s:34:"Культура и религия";s:11:"description";s:214:"Учреждения культуры. Театры, библиотеки, литературные и художественные кружки. Религиозные организации и заведения.";s:5:"count";s:1:"2";s:11:"sites_count";s:1:"7";}}

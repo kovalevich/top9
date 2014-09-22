@@ -1,0 +1,40 @@
+<!-- top -->
+<?php $univer = $this->univers[0]; ?>
+	<div class="bigtab">
+		<span class="position"><?php echo $univer->place.' '.$this->translate('place').':';?></span>
+		<a href="<?php echo $this->url(array('id'=>$univer->id), 'univer'); ?>" title="<?php echo sprintf($this->translate('go_to'), $univer->name); ?>"><?php echo $univer->name; ?></a>
+		<span class="votes">
+		<?php echo sprintf($this->translate(array('vote','votes', $univer->votes)), $univer->votes)?>
+		</span>
+		<a onclick="getItem ('<?php echo $univer->id; ?>', 'univers')" title="<?php echo sprintf($this->translate('vote_for'), $univer->name); ?>" id="vote_button"><?php echo $this->translate('govote'); ?></a>
+		<div style="clear: both;"></div>
+	</div>
+	<div class="leftcolumn">
+	<h3><?php echo $this->translate('top 9 univers') ?><a href="<?php echo $this->url(array('action'=>'all'))?>" title="<?php echo $this->translate('show_all')?>"><?php echo $this->translate('all_univers') ?> &rsaquo;</a></h3>
+Как взять <a href="http://kredit-belarus.by/kredit-na-obuchenie.html" title="Узнать о кредитах в Беларуси">кредит на убучение в Беларуси</a>
+	<?php $i = 0; foreach($this->univers as $univer) : $i++;?>
+	<?php if ($i != 1) :?>
+		<div class="tab">
+			<span class="numb"><?php echo $univer->place;?></span>
+			<a href="<?php echo $this->url(array('id'=>$univer->id), 'univer'); ?>" title="<?php echo sprintf($this->translate('go_to'), $univer->name); ?>"><?php echo $univer->name; ?></a>
+			<span class="votes" title="<?php echo sprintf($this->translate(array('vote','votes', $univer->votes)), $univer->votes)?>"><?php echo $univer->votes; ?></span>
+			<a onclick="getItem ('<?php echo $univer->id; ?>', 'univers')" title="<?php echo sprintf($this->translate('vote_for'), $univer->name); ?>" id="vote_button"><?php echo $this->translate('govote'); ?></a>
+			<span class="descr"><?php echo $univer->full_name; ?></span>
+		</div>
+	<?php endif;?>
+<?php endforeach; ?>
+	
+    </div>
+    <div class="rightcolumn">
+        <h3><?php echo $this->translate('last records') ?></h3>
+        <div id="notations">
+    	</div>
+        <script type="text/javascript">
+            var thisUpdate = function(){
+            	updateNotations('univer', '', true, true);
+            }
+            window.onload = function(){
+                thisUpdate();
+            };
+        </script>
+    </div>

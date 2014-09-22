@@ -1,0 +1,39 @@
+s:783:"<ul class="pagination">
+    <!-- First page link -->
+    <li class="disabled">
+      <a href="#">
+          &laquo;
+      </a>
+    </li>
+    <li class="disabled">
+    <!-- Previous page link -->
+      <a href="#">
+        &lsaquo;
+      </a>
+    <li>
+    
+        <li  class="active">
+    	<a href="#">
+    		<span class="disabled">1</span>
+    	</a>
+    </li>
+        <li  >
+    	<a href="/sites/news_page_2.html">
+    		<span class="disabled">2</span>
+    	</a>
+    </li>
+         
+     <li >
+    <!-- Next page link -->
+      <a href="/sites/news_page_2.html">
+        &rsaquo;
+      </a>
+    </li>
+    <li >
+        <!-- Last page link -->
+        <a href="/sites/news_page_2.html">
+            &rsaquo;&rsaquo;
+        </a>
+    </li>
+</ul>
+";

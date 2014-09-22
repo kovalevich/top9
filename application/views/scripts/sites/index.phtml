@@ -1,0 +1,39 @@
+<?php 
+    $this->headTitle('Каталог беларуских сайтов', 'PREPEND');
+    $this->headMeta('Белый и беспатный беларуский каталог сайтов. Добавить сайт в каталог.', 'description');
+    $this->headMeta('каталог сайтов, беларуские сайты, seo, продвижение статьями', 'keywords');
+?>
+
+<div class="row">
+
+    <div class="col-sm-9 blog-main">
+        <div class="jumbotron">
+            <h1>Каталог сайтов <small>top9.by</small></h1>
+            <p class="lead">Здесть место только интересным и полезным сайтам!</p>
+        </div>
+
+        <?php foreach($this->sites as $site): ?>
+            <div class="blog-post">
+                <h3 class="blog-post-title"><a href="<?php echo $this->url(array('id'=>$site->id, 'category'=>$site->category->id), 'site')?>" title="На страницу сайта"><?php echo $site->title ?></a></h3>
+                <p class="blog-post-meta"><a href="http://<?php echo $site->id ?>" target="_blank"><span class="glyphicon glyphicon-link"></span> <?php echo $site->id ?></a> | в каталоге с <?php echo $this->nicetime($site->created) ?></p>
+
+                <?php echo $this->truncate($site->description, 500) ?>
+                <p><a href="<?php echo $this->url(array('id'=>$site->category->id, 'page'=>1), 'sites_category') ?>"><span class="glyphicon glyphicon-tag"></span> <?php echo $site->category->title ?></a></p>
+            </div><!-- /.blog-post -->
+        <?php endforeach; ?>
+    </div>
+
+    <div class="col-md-3 sidebar">
+        <h3>Категории</h3>
+        <div class="bs-sidebar hidden-print affix-top" role="complementary">
+            <ul class="nav bs-sidenav">
+                <?php foreach($this->categories as $category): ?>
+                    <li><a href="<?php echo $this->url(array('id'=>$category->id, 'page'=>1), 'sites_category') ?>"><span class="badge pull-right"><?php echo $category->sites_count ?></span><?php echo $category->title ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="alert alert-info">
+            <p>Каталог сайтов top9.by содержит только полезные и интересные беларуские сайты! У вас есть интересный сайт? - Немедленно добавьте его в наш каталог!</p>
+        </div>
+    </div>
+</div>

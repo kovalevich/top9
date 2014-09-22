@@ -1,0 +1,34 @@
+s:653:"<ul class="pagination">
+    <!-- First page link -->
+    <li class="disabled">
+      <a href="#">
+          &laquo;
+      </a>
+    </li>
+    <li class="disabled">
+    <!-- Previous page link -->
+      <a href="#">
+        &lsaquo;
+      </a>
+    <li>
+    
+        <li  class="active">
+    	<a href="#">
+    		<span class="disabled">1</span>
+    	</a>
+    </li>
+         
+     <li class="disabled">
+    <!-- Next page link -->
+      <a href="#">
+        &rsaquo;
+      </a>
+    </li>
+    <li class="disabled">
+        <!-- Last page link -->
+        <a href="#">
+            &rsaquo;&rsaquo;
+        </a>
+    </li>
+</ul>
+";

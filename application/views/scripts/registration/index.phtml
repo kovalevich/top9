@@ -1,0 +1,36 @@
+<div class="main-wrapp">
+    <div class="content">
+        <div class="articles">
+            <h1>Регистрация</h1>
+            <?php echo $this->notice ?>
+            
+            <form action="<?php echo $this->form->getAction () ?>" enctype="multipart/form-data" method="post" "<?php echo $this->form->getAttrib('class')?>">
+                <?php echo $this->form->email ?>
+                <?php echo $this->form->name ?>
+                <?php echo $this->form->phone ?>
+                <?php echo $this->form->city ?>
+                <br>
+                <div onclick="$('#hideblock').toggle()">
+                <?php echo $this->form->isauthor ?>
+                </div>
+                
+                <div class="hide" id="hideblock" class="hide">
+                <label>Специализация:</label>
+                <?php echo $this->form->themes ?>
+                <?php echo $this->form->file ?>
+                </div>
+                <?php echo $this->form->registration ?>
+            </form>
+
+            <script type="text/javascript">
+				$("#phone").mask("999 (99) 999-99-99");
+                $('#hideblock').toggle(function () {
+                    $("#hideblock").addClass("hide");
+                }, function () {
+                    $("#hideblock").removeClass("hide");
+                });
+                $('#hideblock').toggle();
+            </script>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<?php
+$this->headTitle($this->city->name, 'PREPEND');
+$this->headMeta($this->city->name . ' в рейтинге городов Беларуси', 'description');
+$this->headMeta($this->city->name . ', города, рейтинг городов, топ городов, лучшие города', 'keywords');
+?>
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/ratings">Рейтинги</a></li>
+    <li><a href="/cities/all">Города</a></li>
+    <li class="active"><?php echo $this->city->name; ?></li>
+</ol>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- city -->
+        <h1>
+            <small><?php echo $this->city->place.' место: ';?></small>
+            <?php echo $this->city->name; ?>
+        </h1>
+        <div class="progress progress-striped">
+            <?php if($this->city->votes > 0) :
+                $percentage = round(100 / $this->max_votes * $this->city->votes, 0);
+                ?>
+                <div id="like" class="progress-bar progress-bar-success" style="width: <?php echo $percentage; ?>%" data-toggle="popover" data-placement="top" data-content="<?php echo sprintf('%d %s признали %s лучшим городом Беларуси', $this->city->votes, $this->bycounts($this->city->votes, 'человек', 'человека', 'людей'), $this->city->name); ?> ">
+                    <strong><span class="glyphicon glyphicon-heart"></span> <?php echo $this->city->votes; ?></strong>
+                    <span class="sr-only"><?php echo $percentage; ?>% Complete</span>
+                </div>
+            <?php endif;?>
+            <?php if($this->city->desire > 0) :
+                $percentage = round(100 / $this->max_votes * $this->city->desire, 0);
+                ?>
+                <div id="popover" class="progress-bar progress-bar-warning" style="width: <?php echo $percentage; ?>%" data-toggle="popover" data-placement="top" data-content="<?php echo sprintf('%d %s хотят жить в городе в %s', $this->city->desire, $this->bycounts($this->city->desire, 'человек', 'человека', 'людей'), $this->city->name); ?> ">
+                    <strong><span class="glyphicon glyphicon-ok"></span> <?php echo $this->city->desire; ?></strong>
+                    <span class="sr-only"><?php echo $percentage; ?>% Complete</span>
+                </div>
+            <?php endif;?>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <img src="/img/cities/<?php echo $this->city->id ?>.jpg" alt="Фото" class="img-thumbnail">
+            </div>
+            <div class="col-sm-7">
+                <div class="row rating">
+                    <h3 class="col-sm-6">Общий рейтинг:</h3>
+                    <h3 class="col-sm-5"><span class="label label-danger"><?php echo $this->city->rating?></span></h3>
+                </div>
+                <div class="row rating">
+                    <h4 class="col-sm-6">Нравится:</h4>
+                    <h4 class="col-sm-5"><span class="label label-danger"><?php echo sprintf('%d %s', $this->city->votes, $this->bycounts($this->city->votes, 'человеку', 'человекам', 'людям'))?></span></h4>
+                </div>
+                <div class="row rating">
+                    <h4 class="col-sm-6">Хотят жить:</h4>
+                    <h4 class="col-sm-5"><span class="label label-danger"><?php echo sprintf('%d %s', $this->city->desire, $this->bycounts($this->city->desire, 'человек', 'человека', 'человек'))?></span></h4>
+                </div>
+                <hr/>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success" onclick="$('#myModalLabel').html('Голосовать за <?php echo $this->city->name; ?>'); getItem ('<?php echo $this->city->id; ?>', 'cities', 'like')" title="<?php echo sprintf('Проголосовать за %s', $this->city->name); ?>" data-toggle="modal" data-target="#modal">
+                        <span class="glyphicon glyphicon-heart"></span> Нравится
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="$('#myModalLabel').html('Голосовать за <?php echo $this->city->name; ?>'); getItem ('<?php echo $this->city->id; ?>', 'cities', 'desire')" title="<?php echo sprintf('Проголосовать за %s', $this->city->name); ?>" data-toggle="modal" data-target="#modal">
+                        <span class="glyphicon glyphicon-ok"></span> Хочу жить в городе <?php echo $this->city->name; ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <h3>О городе</h3>
+        <?php if (!empty($this->city->description)) :?>
+            <p>
+                <?php echo $this->city->description ?>
+            </p>
+        <?php else:?>
+            <p>Об этом городе пока ничего не известно :(</p>
+        <?php endif;?>
+
+    </div>
+    <div class="col-md-4">
+	
+	<div class="well well-sm">
+            <a href="http://100auto.by">100auto.by</a> – онлайн авторынок Беларуси.
+            <div class="sm">
+                Найдите свой автомобиль среди тысячи актуальных предложений в городе <?= $this->city->name; ?> и по всей Беларуси. На нашем сайте все объявления о продаже автомобилей.
+                <a href="http://100auto.by/cars/add">Подать свое объявление</a> вы можете бесплатно и без регистрации всего за несколько минут!
+            </div>
+        </div>
+        <!-- concurents -->
+        <?php if (count ($this->city->concurents) > 0) : ?>
+            <h3>Конкуренты <?php echo $this->city->name; ?></h3>
+            <?php foreach($this->city->concurents as $entry) : ?>
+                <div class="row">
+                    <h4 class="col-sm-4">
+                        <a href="<?php echo $this->url(array('id'=>$entry->id), 'city'); ?>"><?php echo $entry->name; ?></a>
+                    </h4>
+                    <div style="height: 5px;"></div>
+                    <div class="col-sm-8">
+                        <div class="progress progress-striped">
+                            <?php $percentage = round(100 / ($this->max_votes + 0.001) * $entry->rating, 0);?>
+                            <div class="progress-bar progress-bar-success" style="width: <?php echo $percentage; ?>%" data-toggle="popover" data-placement="top" data-content="<?php echo sprintf('%d %s проголосовали за %s', $entry->rating, $this->bycounts($entry->rating, 'человек', 'человека', 'человек'), $entry->name); ?> ">
+                                <strong><span class="glyphicon glyphicon-heart"></span> <?php echo $entry->rating; ?></strong>
+                                <span class="sr-only"><?php echo $percentage; ?>% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div style="clear: both;"></div>
+        <?php endif;?>
+    </div>
+</div>
+
+<div class="modal fade bs-modal-sm" id="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Голосовать за <?php echo $this->city->name; ?></h4>
+            </div>
+            <div class="modal-body" id="social">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/vote.js"></script>

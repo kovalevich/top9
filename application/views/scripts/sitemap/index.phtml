@@ -1,0 +1,74 @@
+<?php
+$this->headTitle('Карта сайта', 'PREPEND');
+$this->headMeta('Публикация статей в каталоге. Продвижение статьями. SEO. Каталог беларуских сайтов', 'description');
+$this->headMeta('каталог статей, публикации, seo, продвижение статьями, каталог сайтов', 'keywords');
+?>
+
+<div class="page-header">
+    <h2>Карта сайта</h2>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <ul>
+            <li>
+                <a href="/">Главная</a>
+                <ul>
+                    <li>
+                        <a href="/articles">Каталог статей</a>
+                        <ul>
+                            <?php
+                                foreach ($this->articles as $article) {
+                                    echo '<li><a href="' . $this->url(array('id'=>$article->id, 'category'=>$article->category->id), 'article') . '">' . $article->title . '</a></li>';
+                                }
+                            ?>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/sites">Каталог сайтов</a>
+                        <ul>
+                            <?php
+                            foreach ($this->sites as $site) {
+                                echo '<li><a href="' . $this->url(array('id'=>$site->id, 'category'=>$site->category->id), 'site') . '">' . $site->title . '</a></li>';
+                            }
+                            ?>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/ratings">Рейтинги</a>
+                        <ul>
+                            <li><a href="/univers/all">Топ универов</a></li>
+                            <li><a href="/colleges/all">Топ колледжей</a></li>
+                            <li><a href="/cities/all">Топ городов</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-4">
+        <ul>
+            <li>
+                <a href="/articles">Каталог статей</a>
+                <ul>
+                    <?php
+                    foreach ($this->categories as $category) {
+                        echo '<li><a href="' . $this->url(array('id'=>$category->id, 'page'=>1), 'articles_category') . '">' . $category->title . '</a></li>';
+                    }
+                    ?>
+                </ul>
+            </li>
+            <li>
+                <a href="/articles">Каталог сайтов</a>
+                <ul>
+                    <?php
+                    foreach ($this->categories as $category) {
+                        echo '<li><a href="' . $this->url(array('id'=>$category->id, 'page'=>1), 'sites_category') . '">' . $category->title . '</a></li>';
+                    }
+                    ?>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,11 @@
+<div class="main-wrapp">         
+    <div class="content">
+        <div class="articles">
+            <h1>Забыли пароль?</h1>
+            <?php if ($this->form) :?>
+                Введите ваш email и мы вышлем вам новый пароль для входа в кабинет
+            <?php echo $this->form; endif;?>
+            <p><?php echo $this->mess ?></p>
+        </div>
+    </div>
+</div>

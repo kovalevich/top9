@@ -1,0 +1,66 @@
+<?php $this->headTitle('Добавить сайт', 'PREPEND'); ?>
+
+<h2>Добавить сайт</h2>
+
+<form class="form-horizontal" role="form" method="post">
+
+    <div class="form-group">
+        <label for="id" class="col-sm-3 control-label">Адрес</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <span class="input-group-addon">http://</span>
+                <input type="text" name="id" class="form-control" id="id" value="<?php echo $this->form->id->getValue() ?>" placeholder="site.by">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="category" class="col-sm-3 control-label">Категория</label>
+        <div class="col-sm-9">
+            <select name="category_id" id="category" class="form-control">
+                <?php foreach ($this->categories as $category): ?>
+                    <option <?php echo $this->form->category_id->getValue() == $category->id ? 'selected ' : ''; ?>value="<?php echo $category->id; ?>"><?php echo $category->title; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="title" class="col-sm-3 control-label">Название сайта</label>
+        <div class="col-sm-9">
+            <input type="text" name="title" class="form-control" id="title" value="<?php echo $this->form->title->getValue() ?>" placeholder="Заголовок">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="editor" class="col-sm-3 control-label">Описание</label>
+        <div class="col-sm-9">
+            <textarea id="editor" name="description" rows="10" cols="80">
+                <?php echo $this->form->description->getValue() ?>
+            </textarea>
+            <script src="/js/ckeditor/ckeditor.js"></script>
+            <script>
+                CKEDITOR.replace( 'editor', {
+                    toolbar:
+                        [
+                            { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+                            { name: 'insert', items : [ 'Image','Table','HorizontalRule','SpecialChar'] },
+                            '/',
+                            { name: 'basicstyles', items : ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+                            { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                            '/',
+                            { name: 'paragraph', items : [ 'NumberedList','BulletedList' ] },
+                            { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+                            { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] }
+                        ]
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,23 @@
+<p class="note"><?php echo sprintf($this->translate('results_search'), $this->word); ?></p>
+<?php if (!empty ($this->univers)) :?>
+<?php foreach($this->univers as $univer) :?>
+
+		<div class="tab">
+			<a onclick="getItem ('<?php echo $univer->id; ?>', 'univers')" title="<?php echo sprintf($this->translate('vote_for'), $univer->name); ?>"><?php echo $univer->name; ?></a>
+			<span class="votes" title="<?php echo sprintf($this->translate(array('vote','votes', $univer->votes)), $univer->votes)?>"><?php echo $univer->votes; ?></span>
+			<span class="descr"><?php echo $univer->full_name; ?></span>
+			<a href="<?php echo $this->url(array('id'=>$univer->id), 'univer'); ?>" class="mini" title="<?php echo sprintf($this->translate('go_to'), $univer->name); ?>">&rsaquo;&rsaquo;</a>
+		</div>
+<?php endforeach; ?>
+<?php endif; ?>
+<?php if (!empty ($this->cities)) :?>
+<?php foreach($this->cities as $city) :?>
+
+		<div class="tab">
+			<a onclick="getItem ('<?php echo $city->id; ?>', 'cities')" title="<?php echo sprintf($this->translate('vote_for'), $city->name); ?>"><?php echo $city->name; ?></a>
+			<span class="votes" title="<?php echo sprintf($this->translate(array('vote','votes', $city->votes)), $city->votes)?>"><?php echo $city->votes; ?></span>
+			<span class="descr"><?php echo $this->truncate($city->description, 170) ?></span>
+			<a href="<?php echo $this->url(array('id'=>$city->id), 'city'); ?>" class="mini" title="<?php echo sprintf($this->translate('go_to'), $city->name); ?>">&rsaquo;&rsaquo;</a>
+		</div>
+<?php endforeach; ?>
+<?php endif; ?>

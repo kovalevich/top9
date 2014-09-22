@@ -1,0 +1,123 @@
+<?php
+    $this->headTitle($this->univer->name, 'PREPEND');
+    $this->headMeta($this->univer->full_name . ' в рейтинге университетов Беларуси', 'description');
+    $this->headMeta($this->univer->name . ', универы, университеты, рейтинг университетов, топ университетов, лучшие университеты', 'keywords');
+?>
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/ratings">Рейтинги</a></li>
+    <li><a href="/univers/">Универы</a></li>
+    <li class="active"><?php echo $this->univer->full_name; ?></li>
+</ol>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- univer -->
+        <h1>
+            <small><?php echo $this->univer->place.' место: ';?></small>
+            <?php echo $this->univer->name; ?>
+            <small><small><?php echo ' (' . $this->univer->full_name . ')';?></small></small>
+        </h1>
+        <div class="progress progress-striped">
+            <?php if($this->univer->votes > 0) :
+                $percentage = round(100 / $this->max_votes * $this->univer->votes, 0);
+            ?>
+                <div id="like" class="progress-bar progress-bar-success" style="width: <?php echo $percentage; ?>%" data-toggle="popover" data-placement="top" data-content="<?php echo sprintf('%d %s признали %s лучшим университетом Беларуси', $this->univer->votes, $this->bycounts($this->univer->votes, 'человек', 'человека', 'людей'), $this->univer->name); ?> ">
+                    <strong><span class="glyphicon glyphicon-heart"></span> <?php echo $this->univer->votes; ?></strong>
+                    <span class="sr-only"><?php echo $percentage; ?>% Complete</span>
+                </div>
+            <?php endif;?>
+            <?php if($this->univer->desire > 0) :
+                $percentage = round(100 / $this->max_votes * $this->univer->desire, 0);
+            ?>
+                <div id="popover" class="progress-bar progress-bar-warning" style="width: <?php echo $percentage; ?>%" data-toggle="popover" data-placement="top" data-content="<?php echo sprintf('%d %s хотят поступить в %s', $this->univer->desire, $this->bycounts($this->univer->desire, 'человек', 'человека', 'людей'), $this->univer->name); ?> ">
+                    <strong><span class="glyphicon glyphicon-ok"></span> <?php echo $this->univer->desire; ?></strong>
+                    <span class="sr-only"><?php echo $percentage; ?>% Complete</span>
+                </div>
+            <?php endif;?>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <img src="/img/univers/<?php echo $this->univer->id ?>.jpg" alt="Фото" class="img-thumbnail">
+            </div>
+            <div class="col-sm-7">
+                <div class="row rating">
+                    <h3 class="col-sm-6">Общий рейтинг:</h3>
+                    <h3 class="col-sm-5"><span class="label label-danger"><?php echo $this->univer->rating?></span></h3>
+                </div>
+                <div class="row rating">
+                    <h4 class="col-sm-6">Нравится:</h4>
+                    <h4 class="col-sm-5"><span class="label label-danger"><?php echo sprintf('%d %s', $this->univer->votes, $this->bycounts($this->univer->votes, 'человеку', 'человекам', 'людям'))?></span></h4>
+                </div>
+                <div class="row rating">
+                    <h4 class="col-sm-6">Хотят поступить:</h4>
+                    <h4 class="col-sm-5"><span class="label label-danger"><?php echo sprintf('%d %s', $this->univer->desire, $this->bycounts($this->univer->desire, 'человек', 'человека', 'человек'))?></span></h4>
+                </div>
+                <hr/>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success" onclick="$('#myModalLabel').html('Голосовать за <?php echo $this->univer->name; ?>'); getItem ('<?php echo $this->univer->id; ?>', 'univers', 'like')" title="<?php echo sprintf('Проголосовать за %s', $this->univer->name); ?>" data-toggle="modal" data-target="#modal">
+                        <span class="glyphicon glyphicon-heart"></span> Нравится
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="$('#myModalLabel').html('Голосовать за <?php echo $this->univer->name; ?>'); getItem ('<?php echo $this->univer->id; ?>', 'univers', 'desire')" title="<?php echo sprintf('Проголосовать за %s', $this->univer->name); ?>" data-toggle="modal" data-target="#modal">
+                        <span class="glyphicon glyphicon-ok"></span> Хочу учиться в <?php echo $this->univer->name; ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <h3>О университете</h3>
+        <?php if (!empty($this->univer->description)) :?>
+            <p>
+                <?php echo $this->univer->description ?>
+            </p>
+        <?php else:?>
+            <p>Об этом университете пока ничего не известно :(</p>
+        <?php endif;?>
+
+    </div>
+    <div class="col-md-4">
+        <h3>Информация</h3>
+        <p><?php echo $this->univer->full_name ?> находится в городе &rsaquo; <a href="<?php echo $this->url(array('id'=>$this->univer->city->id), 'city'); ?>" title="<?php echo sprintf('Перейти на страницу города %s', $this->univer->city->name); ?>"><?php echo $this->univer->city->name; ?></a></p>
+		
+        <!-- concurents -->
+        <?php if (count ($this->univer->concurents) > 0) : ?>
+            <h3>Конкуренты <?php echo $this->univer->name; ?></h3>
+            <?php foreach($this->univer->concurents as $entry) : ?>
+                <div class="row">
+                    <h4 class="col-sm-4">
+                        <a href="<?php echo $this->url(array('id'=>$entry->id), 'univer'); ?>"><?php echo $entry->name; ?></a>
+                    </h4>
+                    <div style="height: 5px;"></div>
+                    <div class="col-sm-8">
+                        <div class="progress progress-striped">
+                            <?php $percentage = round(100 / ($this->max_votes + 0.001) * $entry->rating, 0);?>
+                            <div class="progress-bar progress-bar-success" style="width: <?php echo $percentage; ?>%" data-toggle="popover" data-placement="top" data-content="<?php echo sprintf('%d %s проголосовали за %s', $entry->rating, $this->bycounts($entry->rating, 'человек', 'человека', 'человек'), $entry->name); ?> ">
+                                <strong><span class="glyphicon glyphicon-heart"></span> <?php echo $entry->rating; ?></strong>
+                                <span class="sr-only"><?php echo $percentage; ?>% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <div style="clear: both;"></div>
+        <?php endif;?>
+    </div>
+</div>
+
+<div class="modal fade bs-modal-sm" id="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Голосовать за <?php echo $this->univer->name; ?></h4>
+            </div>
+            <div class="modal-body" id="social">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/vote.js"></script>

@@ -1,0 +1,28 @@
+<?php
+$this->headTitle('Каталог статей / ' . $this->category->title, 'PREPEND');
+$this->headMeta($this->category->description, 'description');
+$this->headMeta('каталог статей, публикации, seo, продвижение статьями', 'keywords');
+?>
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/articles">Каталог статей</a></li>
+    <li class="active"><?php echo $this->category->title; ?></li>
+</ol>
+
+<div class="row">
+    <div class="col-sm-9 blog-main">
+        <?php foreach($this->articles as $article): ?>
+            <div class="blog-post">
+                <h3 class="blog-post-title"><a href="<?php echo $this->url(array('id'=>$article->id, 'category'=>$article->category->id), 'article')?>" title="Читать статью полностью"><?php echo $article->title ?></a></h3>
+                <p class="blog-post-meta"><?php echo $this->nicetime($article->created) ?></p>
+
+                <?php echo $this->truncate($article->text, 400) ?>
+            </div><!-- /.blog-post -->
+        <?php endforeach; ?>
+        <?php echo $this->paginator ?>
+    </div>
+    <div class="col-sm-3">
+
+    </div>
+</div>

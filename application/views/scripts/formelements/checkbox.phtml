@@ -1,0 +1,11 @@
+<label for="checkbox"><?php echo $this->element->getLabel()?></label>
+<div class="checkboxes">
+	<?php echo $this->{$this->element->helper}(
+        $this->element->getName(),
+        $this->element->getValue(),
+        $this->element->getAttribs()
+    ) ?>
+	<?php if ($this->element->getMessages()) 
+	    echo $this->formErrors($this->element->getMessages())
+	?>
+</div>

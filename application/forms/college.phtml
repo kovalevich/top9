@@ -1,0 +1,85 @@
+<?php
+$this->headTitle($this->college->name, 'PREPEND');
+$this->headMeta($this->college->full_name . ' в рейтинге университетов Беларуси', 'description');
+$this->headMeta($this->college->name . ', универы, университеты, рейтинг университетов, топ университетов, лучшие университеты', 'keywords');
+?>
+
+<div class="row">
+	<div class="text-center">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- top_home -->
+	<ins class="adsbygoogle"
+		 style="display:inline-block;width:728px;height:90px"
+		 data-ad-client="ca-pub-5099021714015509"
+		 data-ad-slot="6633653133"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+	</div>
+</div>
+
+<ol class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/ratings">Рейтинги</a></li>
+    <li><a href="/colleges/">Колледжи</a></li>
+    <li class="active"><?php echo $this->college->full_name; ?></li>
+</ol>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- college -->
+        <h1>
+            <small><?php echo $this->college->place.' место: ';?></small>
+            <?php echo $this->college->name; ?>
+        </h1>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default btn-lg"><?php echo sprintf($this->bycounts($this->college->votes, '%s голос', '%s голоса', '%s голосов'), $this->college->votes)?></button>
+            <button type="button" class="btn btn-success btn-lg" onclick="$('#myModalLabel').html('Голосовать за <?php echo $this->college->name; ?>'); getItem ('<?php echo $this->college->id; ?>', 'colleges')" title="<?php echo sprintf('Проголосовать за %s', $this->college->name); ?>" data-toggle="modal" data-target="#modal"><span class="glyphicon glyphicon-plus-sign"></span> Голосовать</button>
+        </div>
+
+        <h3>О колледже</h3>
+        <?php if (!empty($this->college->description)) :?>
+            <p>
+                <?php echo $this->college->description ?>
+            </p>
+        <?php else:?>
+            <p>Об этом колледже пока ничего не известно :(</p>
+        <?php endif;?>
+    </div>
+    <div class="col-md-4">
+
+        <h3>Информация</h3>
+        <p><?php echo $this->college->full_name ?> находится в городе &rsaquo; <a href="<?php echo $this->url(array('id'=>$this->college->city->id), 'city'); ?>" title="<?php echo sprintf('Перейти на страницу города %s', $this->college->city->name); ?>"><?php echo $this->college->city->name; ?></a></p>
+
+        <!-- concurents -->
+        <?php if (count ($this->college->concurents) > 0) : ?>
+            <h3>Конкуренты <?php echo $this->college->name; ?></h3>
+            <?php $i = 0; foreach($this->college->concurents as $college) : $i++;?>
+                <a class="btn btn-default" href="<?php echo $this->url(array('id'=>$college->id), 'college'); ?>" title="<?php echo sprintf('Перейти на страницу %s', $college->name); ?>"><?php echo $college->name; ?> <span class="badge"><?php echo $college->votes; ?></span></a>
+            <?php endforeach;?>
+            <div style="clear: both;"></div>
+        <?php endif;?>
+        <?php if ($this->user && $this->user->role == 'admin'):?>
+            <h3><?php echo $this->translate('actions') ?></h3>
+            <div class="description">
+                <a href="<?php echo $this->url(array('id'=>$this->college->id), 'editcollege')?>"><?php echo $this->translate('edit')?></a>
+            </div>
+        <?php endif;?>
+    </div>
+</div>
+
+<div class="modal fade bs-modal-sm" id="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" id="social">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/vote.js"></script>
